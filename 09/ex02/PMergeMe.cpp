@@ -6,7 +6,7 @@
 /*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 10:51:52 by mknoll            #+#    #+#             */
-/*   Updated: 2025/12/08 15:09:13 by mknoll           ###   ########.fr       */
+/*   Updated: 2025/12/10 14:13:23 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,8 @@
 #include <algorithm>
 #include <unistd.h> //for sleep function
 #include <climits>
+#include <cmath>
+#include <iterator>
 
 PMergeMe::PMergeMe() {}
 
@@ -68,32 +70,39 @@ void PMergeMe::printBeforeSort()
 	std::cout << std::endl;
 }
 
-// Ford-Johnson sort for std::vector
-void fordJohnsonSortVector(std::vector<int> &vec)
-{
-	if (vec.size() <= 1)
-		return;
-
-}
-
-// Ford-Johnson sort for std::list
-void fordJohnsonSortList(std::list<int> &lst)
-{
-	if (lst.size() <= 1)
-		return;
-}
+// Sort both containers and print performance comparison
 void PMergeMe::sortAndPrint()
 {
 	long long vecStart, vecEnd;
 	long long listStart, listEnd;
+	
 	// Sort and time std::vector
-	vecStart = get_time_ms();
+	vecStart = get_time_us();
 	fordJohnsonSortVector(vecContainer);
-	vecEnd = get_time_ms();
+	vecEnd = get_time_us();
 
-	listStart = get_time_ms();
+	listStart = get_time_us();
 	fordJohnsonSortList(listContainer);
-	listEnd = get_time_ms();
+	listEnd = get_time_us();
+	
+	// Print sorted result
+	std::cout << "After: ";
+	if (vecContainer.size() > 5)
+	{
+		for (size_t i = 0; i < 5; i++)
+		{
+			std::cout << vecContainer[i] << " ";
+		}
+		std::cout << "[...]";
+	}
+	else
+	{
+		for (size_t i = 0; i < vecContainer.size(); i++)
+		{
+			std::cout << vecContainer[i] << " ";
+		}
+	}
+	std::cout << std::endl;
 	
 	// Show Performance comparison between vector and list sorting
 	std::cout << "Time to process a range of " 
@@ -132,11 +141,11 @@ int check_args(int argc, char *argv[])
 	return 1;
 }
 
-// Get current time in milliseconds since epoch
-long long get_time_ms()
+// Get current time in microseconds since epoch (more precise)
+long long get_time_us()
 {
 	struct timeval time;
 	gettimeofday(&time, NULL);
-	// from microseconds to milliseconds
-	return (time.tv_sec * 1000) + (time.tv_usec / 1000); ;
+	// Return microseconds for higher precision
+	return (time.tv_sec * 1000000) + time.tv_usec;
 }

@@ -6,7 +6,7 @@
 /*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 13:19:25 by mknoll            #+#    #+#             */
-/*   Updated: 2025/11/17 12:12:07 by mknoll           ###   ########.fr       */
+/*   Updated: 2025/12/11 13:30:30 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ int main(){
 	// Alice.highFivesGuys();
 
 	std::cout << "\n=== Testing DiamondTrap ===" << std::endl; 
-	DiamondTrap Tim("Tim"); 
+	DiamondTrap Tim; 
 	
 	Tim.whoAmI();
 	Tim.attack("Enemy");
