@@ -6,7 +6,7 @@
 /*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/05 14:33:16 by mknoll            #+#    #+#             */
-/*   Updated: 2025/11/17 11:52:13 by mknoll           ###   ########.fr       */
+/*   Updated: 2025/12/11 13:25:26 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "FragTrap.hpp"
 
-class DiamondTrap: virtual public ScavTrap, virtual public FragTrap{
+class DiamondTrap: virtual public FragTrap, virtual public ScavTrap{
 	private: 
 		std::string name;
 		

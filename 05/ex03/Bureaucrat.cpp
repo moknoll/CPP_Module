@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Bureaucrat.cpp                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moritzknoll <moritzknoll@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/19 08:39:17 by moritzknoll       #+#    #+#             */
-/*   Updated: 2025/11/20 14:47:49 by moritzknoll      ###   ########.fr       */
+/*   Updated: 2025/12/03 11:59:08 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -95,7 +95,7 @@ void Bureaucrat::signForm(AForm &f) const
     }
 }
 
-//Eception Classes 
+//Exception Classes 
 const char* Bureaucrat::GradeTooHighException::what() const throw()
 {
     return "Grade is too high!";

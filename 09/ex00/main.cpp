@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moritzknoll <moritzknoll@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 13:26:32 by mknoll            #+#    #+#             */
-/*   Updated: 2025/12/03 10:40:12 by moritzknoll      ###   ########.fr       */
+/*   Updated: 2025/12/08 14:57:53 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int main ()
     {
         std::cout << "Bitcoin exchange fees:" << std::endl; 
         DatesAndPrices bitcoin("data.csv"); // load datebase 
-        bitcoin.printFees("input.txt");
+        bitcoin.printFees("test.txt");
     } 
     catch (std::exception &e) 
     {

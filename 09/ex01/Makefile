@@ -5,9 +5,9 @@ CXX = c++
 CXX_FLAGS = -Wall -Werror -Wextra -std=c++98
 
 #Sources
-SRCS = main.cpp 
+SRCS = main.cpp RPN.cpp
 OBJS = $(SRCS:.cpp=.o)
-NAME = easyFind
+NAME = RPN
 #Targets
 all: $(NAME)
 

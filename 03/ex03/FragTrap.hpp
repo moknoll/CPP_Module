@@ -6,7 +6,7 @@
 /*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/10/31 16:33:30 by mknoll            #+#    #+#             */
-/*   Updated: 2025/11/12 11:50:23 by mknoll           ###   ########.fr       */
+/*   Updated: 2025/12/11 13:28:47 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 
 #include "ScavTrap.hpp"
 
-class FragTrap: virtual public ScavTrap{
+class FragTrap: virtual public ClapTrap{
 	public:
 		FragTrap();
 		~FragTrap();
@@ -24,6 +24,7 @@ class FragTrap: virtual public ScavTrap{
 		FragTrap &operator=(const FragTrap &obj);
 
 		void highFivesGuys(void);
+		int getDamage();
 		
 };
 

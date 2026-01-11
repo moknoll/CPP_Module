@@ -5,30 +5,32 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/12/03 12:26:23 by mknoll            #+#    #+#             */
-/*   Updated: 2025/12/04 10:43:43 by mknoll           ###   ########.fr       */
+/*   Created: 2025/12/04 10:51:59 by mknoll            #+#    #+#             */
+/*   Updated: 2025/12/08 14:36:22 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include "PMergeMe.hpp"
 #include <iostream> 
-#include "RPN.hpp"
-#include "exception"
+#include <exception>
 
 int main(int argc, char *argv[])
 {
-	if (argc != 2)
-	{
-		std::cout << "ERROR: only two arguments allowed!" << std::endl;
-		return 1;
-	}
 	try
 	{
-		RPN rpn(argv[1]);
-		rpn.calculation();	
+		if (check_args(argc, argv))
+		{
+		 	PMergeMe pMergeMe;
+		 	pMergeMe.fillContainers(argc, argv);
+		 	pMergeMe.printBeforeSort();
+		 	pMergeMe.sortAndPrint();
+		}
 	}
-	catch(std::exception &e)
+	catch(const std::exception& e)
 	{
-		std::cout << "ERROR: " << e.what() << std::endl;
+		std::cerr << e.what() << '\n';
 	}
 	
+	
+				
 }
