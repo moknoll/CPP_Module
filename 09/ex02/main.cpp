@@ -6,7 +6,7 @@
 /*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 10:51:59 by mknoll            #+#    #+#             */
-/*   Updated: 2025/12/08 14:36:22 by mknoll           ###   ########.fr       */
+/*   Updated: 2026/01/12 11:08:06 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,8 +29,5 @@ int main(int argc, char *argv[])
 	catch(const std::exception& e)
 	{
 		std::cerr << e.what() << '\n';
-	}
-	
-	
-				
+	}	
 }

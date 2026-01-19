@@ -6,7 +6,7 @@
 /*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 13:26:36 by mknoll            #+#    #+#             */
-/*   Updated: 2025/12/08 14:55:17 by mknoll           ###   ########.fr       */
+/*   Updated: 2026/01/12 11:01:11 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,17 +42,17 @@ DatesAndPrices::~DatesAndPrices() {}
 // Find price for a specific date (returns closest available date)
 double DatesAndPrices::priceForDate(const std::string& date) const
 {
-    // Try to find exact date
+    // Try to find exact date with iterator on map (fees)
     std::map<std::string, double>::const_iterator it = fees.find(date);
     if (it != fees.end()) 
-        return it->second;
+        return it->second; // Exact date found
         
     // If exact date not found, find the closest earlier date
     it = fees.lower_bound(date);
     if (it != fees.begin())
     {
         --it;  // Get the previous date (closest earlier date)
-        return it->second;
+        return it->second; // Closest earlier date found
     }
     
     // No valid date found
@@ -61,6 +61,7 @@ double DatesAndPrices::priceForDate(const std::string& date) const
 
 void DatesAndPrices::loadDatabase(const std::string& filename)
 {
+    // Open file
     std::ifstream file(filename.c_str());
     if (!file.is_open())
         throw std::runtime_error("Could not open database file"); 
@@ -81,6 +82,7 @@ void DatesAndPrices::loadDatabase(const std::string& filename)
         std::string date; 
         std::string priceStr; 
 
+        // Parse everything before ',' as date and after as price
         if(!std::getline(ss, date, ','))
             continue;
         if(!std::getline(ss, priceStr)) 
@@ -130,15 +132,16 @@ void DatesAndPrices::printFees(const std::string &filename)
         valueStr = trim(valueStr);
 
         // Validate date
-        if(!isValidDate(date)) {
+        if(!isValidDate(date)) 
+        {
             std::cout << "Error: bad input => " << date << std::endl;
             continue;
         }
 
-        // Convert to doouble end check values 
+        // Convert to double and check values 
         double value = std::atof(valueStr.c_str());
-        
-        if(!isValidValue(value)) {
+        if(!isValidValue(value)) 
+        {
             if(value < 0)
                 std::cout << "Error: not a positive number." << std::endl;
             else if(value > 1000)
@@ -211,8 +214,7 @@ bool DatesAndPrices::isValidDate(const std::string& dateStr) const
             maxDay = 31; 
             break;
     }
-    
-    return day <= maxDay;
+    return (day <= maxDay);
 }
 
 // Helper function for value

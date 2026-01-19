@@ -6,7 +6,7 @@
 /*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 10:51:52 by mknoll            #+#    #+#             */
-/*   Updated: 2025/12/10 14:13:23 by mknoll           ###   ########.fr       */
+/*   Updated: 2026/01/19 15:19:13 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,21 +16,21 @@
 #include <cstdlib>
 #include <sys/time.h>
 #include <algorithm>
-#include <unistd.h> //for sleep function
+#include <unistd.h>
 #include <climits>
 #include <cmath>
 #include <iterator>
 
 PMergeMe::PMergeMe() {}
 
-PMergeMe::PMergeMe(const PMergeMe &other) : vecContainer(other.vecContainer), listContainer(other.listContainer){}
+PMergeMe::PMergeMe(const PMergeMe &other) : vecContainer(other.vecContainer), dequeContainer(other.dequeContainer){}
 
 PMergeMe &PMergeMe::operator=(const PMergeMe &other)
 {
 	if (this != &other)
 	{
 		vecContainer = other.vecContainer;
-		listContainer = other.listContainer;
+		dequeContainer = other.dequeContainer;
 	}
 	return *this;
 }
@@ -45,7 +45,7 @@ void PMergeMe::fillContainers(int argc, char *argv[])
 	{
 		int num = std::atoi(argv[i]);
 		vecContainer.push_back(num);
-		listContainer.push_back(num);
+		dequeContainer.push_back(num);
 	}
 }
 
@@ -74,22 +74,22 @@ void PMergeMe::printBeforeSort()
 void PMergeMe::sortAndPrint()
 {
 	long long vecStart, vecEnd;
-	long long listStart, listEnd;
+	// long long dequeStart, dequeEnd;
 	
 	// Sort and time std::vector
 	vecStart = get_time_us();
 	fordJohnsonSortVector(vecContainer);
 	vecEnd = get_time_us();
 
-	listStart = get_time_us();
-	fordJohnsonSortList(listContainer);
-	listEnd = get_time_us();
+	// dequeStart = get_time_us();
+	// fordJohnsonSortDeque(dequeContainer);
+	// dequeEnd = get_time_us();
 	
 	// Print sorted result
 	std::cout << "After: ";
 	if (vecContainer.size() > 5)
 	{
-		for (size_t i = 0; i < 5; i++)
+		for (size_t i = 0; i < 10; i++)
 		{
 			std::cout << vecContainer[i] << " ";
 		}
@@ -104,12 +104,12 @@ void PMergeMe::sortAndPrint()
 	}
 	std::cout << std::endl;
 	
-	// Show Performance comparison between vector and list sorting
+	// Show Performance comparison between vector and deque sorting
 	std::cout << "Time to process a range of " 
 			  << vecContainer.size() << " elements with std::vector : " 
 			  << (vecEnd - vecStart) << " ms" << std::endl;
-	std::cout << "Time to process a range of " << listContainer.size() 
-			  << " elements with std::list : " << (listEnd - listStart) << " ms" << std::endl;
+	// std::cout << "Time to process a range of " << dequeContainer.size() 
+	// 		  << " elements with std::deque : " << (dequeEnd - dequeStart) << " ms" << std::endl;
 }
 
 
@@ -117,9 +117,9 @@ void PMergeMe::sortAndPrint()
 int check_args(int argc, char *argv[])
 {
 	// Check for minimum number of arguments
-	if(argc <= 2)
+	if(argc < 2)
 		throw std::runtime_error("Not enough arguments");
-	else if(argc >= 2)
+	else if (argc >= 2)
 	{
 		// Check each argument for validity
 		for (int i = 1; i < argc;i++)
@@ -141,7 +141,7 @@ int check_args(int argc, char *argv[])
 	return 1;
 }
 
-// Get current time in microseconds since epoch (more precise)
+// Get current time in microseconds since epoch 
 long long get_time_us()
 {
 	struct timeval time;

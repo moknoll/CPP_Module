@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: moritzknoll <moritzknoll@student.42.fr>    +#+  +:+       +#+        */
+/*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/11/28 13:26:39 by mknoll            #+#    #+#             */
-/*   Updated: 2025/12/03 12:13:29 by moritzknoll      ###   ########.fr       */
+/*   Updated: 2026/01/13 10:10:44 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,6 @@ class DatesAndPrices
 {
 	private: 
 		std::map<std::string, double> fees;
-		
 	public:
 		// Constructor & Destructor
 		DatesAndPrices();

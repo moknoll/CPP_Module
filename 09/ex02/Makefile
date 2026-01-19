@@ -5,7 +5,7 @@ CXX = c++
 CXX_FLAGS = -Wall -Werror -Wextra -std=c++98
 
 #Sources
-SRCS = main.cpp PMergeMe.cpp fordJohnsonVec.cpp fordJohnsonList.cpp
+SRCS = main.cpp PMergeMe.cpp FordJohnson.cpp
 OBJS = $(SRCS:.cpp=.o)
 NAME = PMergeMe
 #Targets
