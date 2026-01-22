@@ -1,49 +1,48 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FordJohnson.cpp                                    :+:      :+:    :+:   */
+/*   FordJohnsonDeque.cpp                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2026/01/19 10:06:00 by mknoll            #+#    #+#             */
-/*   Updated: 2026/01/22 14:25:40 by mknoll           ###   ########.fr       */
+/*   Created: 2026/01/22 14:49:02 by mknoll            #+#    #+#             */
+/*   Updated: 2026/01/22 14:53:25 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PMergeMe.hpp"
 #include <iostream>
-#include <vector>
 #include <deque>
 #include <algorithm>
 #include <utility>
 
-// Jacobsthal number generator
-int jacobsthal(int n)
+int jacobsthalDeque(int n)
 {
 	if (n == 0)
 		return 0;
 	else if (n == 1)
 		return 1;
 	else
-		return jacobsthal(n - 1) + 2 * jacobsthal(n - 2);
+		return jacobsthalDeque(n - 1) + 2 * jacobsthalDeque(n - 2);
 }
 
+
 // Ford-Johnson sort for std::vector
-void fordJohnsonSortVector(std::vector<int>& vec)
+void fordJohnsonSortDeque(std::deque<int>& deq)
 {
-    if (vec.size() <= 1)
+    if (deq.size() <= 1)
         return;
     
-    int m = vec.size() / 2;
+    int m = deq.size() / 2;
 
-    std::vector<int> winners;
-	std::vector< std::pair<int, int> > pairs;
+    std::deque<int> winners;
+	std::deque< std::pair<int, int> > pairs;
 
 	// Step 1: Pairwise comparison and splitting into W and L
     for(int i = 0; i < m; i++)
     {
-        int a = vec[2 * i];
-		int b = vec[2 * i + 1];
+        int a = deq[2 * i];
+		int b = deq[2 * i + 1];
 		if (a > b)
 			std::swap(a, b);
 		pairs.push_back(std::make_pair(a, b));
@@ -51,21 +50,21 @@ void fordJohnsonSortVector(std::vector<int>& vec)
     }
 	
 	// If odd, add the last unpaired element to L
-    bool hasOdd = (vec.size() % 2 != 0);
-	int unpaired = hasOdd ? vec.back() : -1;
+    bool hasOdd = (deq.size() % 2 != 0);
+	int unpaired = hasOdd ? deq.back() : -1;
 	
     // Step 2: Sort the larger elements recursively
-    fordJohnsonSortVector(winners);
+    fordJohnsonSortDeque(winners);
     
 	// Step 3: Binary Insertion of smaller elements into sorted
-	std::vector<int> main = winners; // Start with sorted larger elements
+	std::deque<int> main = winners; // Start with sorted larger elements
 
 	// Generate Jacobsthal order
-	std::vector<unsigned int> order;
+	std::deque<unsigned int> order;
 	int k = 1;
 	while (true)
 	{
-		unsigned int jaco = jacobsthal(k);
+		unsigned int jaco = jacobsthalDeque(k);
 		if (jaco > pairs.size() -1)
 			break;
 		bool exists = false;
@@ -103,19 +102,19 @@ void fordJohnsonSortVector(std::vector<int>& vec)
 	{
 		std::pair<int, int> p = pairs[order[i]];
 		// until winner found larger than p.second
-		std::vector<int>::iterator wpos = std::find(main.begin(), main.end(), p.second);
+		std::deque<int>::iterator wpos = std::find(main.begin(), main.end(), p.second);
 		// Insert p.first before wpos
-		std::vector<int>::iterator pos = std::lower_bound(main.begin(), wpos, p.first);
+		std::deque<int>::iterator pos = std::lower_bound(main.begin(), wpos, p.first);
 		main.insert(pos, p.first);
 	}
 
 	// If odd, insert unpaired element
 	if (hasOdd)
 	{
-		std::vector<int>::iterator pos = std::lower_bound(main.begin(), main.end(), unpaired);
+		std::deque<int>::iterator pos = std::lower_bound(main.begin(), main.end(), unpaired);
 		main.insert(pos, unpaired);
 	}
 	
 	// Copy back to original vector
-	vec = main;
+	deq = main;
 }

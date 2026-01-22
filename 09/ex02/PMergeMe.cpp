@@ -6,7 +6,7 @@
 /*   By: mknoll <mknoll@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/12/04 10:51:52 by mknoll            #+#    #+#             */
-/*   Updated: 2026/01/19 15:19:13 by mknoll           ###   ########.fr       */
+/*   Updated: 2026/01/22 14:51:00 by mknoll           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,9 +52,9 @@ void PMergeMe::fillContainers(int argc, char *argv[])
 void PMergeMe::printBeforeSort()
 {
 	std::cout << "Before: ";
-	if (vecContainer.size() > 5)
+	if (vecContainer.size() > 10)
 	{
-		for (size_t i = 0; i < 5; i++)
+		for (size_t i = 0; i < 10; i++)
 		{
 			std::cout << vecContainer[i] << " ";
 		}
@@ -74,20 +74,20 @@ void PMergeMe::printBeforeSort()
 void PMergeMe::sortAndPrint()
 {
 	long long vecStart, vecEnd;
-	// long long dequeStart, dequeEnd;
+	long long dequeStart, dequeEnd;
 	
 	// Sort and time std::vector
 	vecStart = get_time_us();
 	fordJohnsonSortVector(vecContainer);
 	vecEnd = get_time_us();
 
-	// dequeStart = get_time_us();
-	// fordJohnsonSortDeque(dequeContainer);
-	// dequeEnd = get_time_us();
+	dequeStart = get_time_us();
+	fordJohnsonSortDeque(dequeContainer);
+	dequeEnd = get_time_us();
 	
 	// Print sorted result
 	std::cout << "After: ";
-	if (vecContainer.size() > 5)
+	if (vecContainer.size() > 10)
 	{
 		for (size_t i = 0; i < 10; i++)
 		{
@@ -108,10 +108,9 @@ void PMergeMe::sortAndPrint()
 	std::cout << "Time to process a range of " 
 			  << vecContainer.size() << " elements with std::vector : " 
 			  << (vecEnd - vecStart) << " ms" << std::endl;
-	// std::cout << "Time to process a range of " << dequeContainer.size() 
-	// 		  << " elements with std::deque : " << (dequeEnd - dequeStart) << " ms" << std::endl;
+	std::cout << "Time to process a range of " << dequeContainer.size() 
+			  << " elements with std::deque : " << (dequeEnd - dequeStart) << " ms" << std::endl;
 }
-
 
 //helper functions
 int check_args(int argc, char *argv[])
